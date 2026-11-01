@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,7 @@ public class Hotel {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    @Lob
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
@@ -45,4 +47,15 @@ public class Hotel {
     @Column(name = "amenity", nullable = false)
     @Builder.Default
     private Set<String> amenities = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Hotel hotel)) return false;
+        return Objects.equals(id, hotel.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

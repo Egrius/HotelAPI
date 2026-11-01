@@ -119,3 +119,8 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: hotels
             onDelete: CASCADE
+
+        - addPrimaryKey:
+            tableName: hotel_amenities
+            columnNames: hotel_id, amenity
+            constraintName: pk_hotel_amenities
