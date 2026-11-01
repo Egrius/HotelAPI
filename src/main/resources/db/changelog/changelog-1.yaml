@@ -1,0 +1,121 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Egrius
+      comment: Initial database creation
+      changes:
+        - createTable:
+            tableName: hotels
+            columns:
+
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: TEXT
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: brand
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+            # Address
+              - column:
+                  name: house_number
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: street
+                  type:  VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: city
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: country
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: post_code
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+
+              # Contacts
+              - column:
+                  name: phone
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: email
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+
+              # Arrival Time
+              - column:
+                  name: check_in
+                  type: TIME
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: check_out
+                  type: TIME
+                  constraints:
+                    nullable: true
+
+        - createTable:
+            tableName: hotel_amenities
+            columns:
+
+              - column:
+                  name: hotel_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: amenity
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: Egrius
+      comment: Adding constraints
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: hotel_amenities
+            baseColumnNames: hotel_id
+            constraintName: fk_hotel_amenities_hotel
+            referencedColumnNames: id
+            referencedTableName: hotels
+            onDelete: CASCADE
