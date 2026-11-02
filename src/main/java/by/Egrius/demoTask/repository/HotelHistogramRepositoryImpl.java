@@ -30,6 +30,9 @@ public class HotelHistogramRepositoryImpl implements HotelHistogramRepository {
 
     @Override
     public Map<String, Long> getHistogram(String param) {
+
+        if(param == null) throw new IllegalArgumentException("Param can't be null");
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<HistogramProjection> cq = cb.createQuery(HistogramProjection.class);
         Root<Hotel> root = cq.from(Hotel.class);

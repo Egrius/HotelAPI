@@ -54,6 +54,7 @@ public class HotelFilterRepositoryImpl implements HotelFilterRepository {
             filterPredicates.add(amenitiesJoin.in(filter.amenities()));
         }
 
+        cq.distinct(true);
         cq.where(filterPredicates.toArray(Predicate[]::new));
         cq.orderBy(cb.asc(hotel.get("id")));
 

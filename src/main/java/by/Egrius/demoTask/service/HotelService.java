@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -62,6 +61,7 @@ public class HotelService {
     }
 
     // 4)
+    // Нет бизнес ключа, чтобы не допускать дубликатов по содержанию
     @Transactional
     public HotelShortInfoReadDto createHotel(HotelCreateDto createDto) {
 
