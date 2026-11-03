@@ -27,7 +27,7 @@ public class Hotel {
     private String name;
 
     @Lob
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
     @Column(name = "brand", nullable = false, length = 100)
@@ -48,6 +48,7 @@ public class Hotel {
     @Builder.Default
     private Set<String> amenities = new HashSet<>();
 
+    // Бизнес ключ упущен осознанно
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Hotel hotel)) return false;

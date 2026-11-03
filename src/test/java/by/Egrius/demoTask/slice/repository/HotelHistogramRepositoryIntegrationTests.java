@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ActiveProfiles("test")
 @DataJpaTest
 @Import(HotelHistogramRepositoryImpl.class)
-public class HotelHistogramRepositoryIT {
+public class HotelHistogramRepositoryIntegrationTests {
 
     @Autowired
     private HotelHistogramRepository hotelHistogramRepository;
@@ -243,7 +243,7 @@ public class HotelHistogramRepositoryIT {
 
             Map<String, Long> result = hotelHistogramRepository.getHistogram(param);
 
-            assertThat(result.keySet()).containsExactlyInAnyOrderElementsOf(List.of(brandA, brandB, brandC));
+            assertThat(result.keySet()).containsExactly(brandA, brandB, brandC);
         }
 
         @Test

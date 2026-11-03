@@ -4,6 +4,7 @@ import by.Egrius.demoTask.dto.hotel.HotelCreateDto;
 import by.Egrius.demoTask.dto.hotel.HotelReadDto;
 import by.Egrius.demoTask.dto.hotel.HotelShortInfoReadDto;
 import by.Egrius.demoTask.entity.Hotel;
+import by.Egrius.demoTask.exception.HotelNotFoundException;
 import by.Egrius.demoTask.mapper.HotelReadMapper;
 import by.Egrius.demoTask.repository.HotelFilterRepository;
 import by.Egrius.demoTask.repository.HotelHistogramRepository;
@@ -11,7 +12,6 @@ import by.Egrius.demoTask.repository.HotelRepository;
 import by.Egrius.demoTask.repository.filter.HotelFilter;
 import by.Egrius.demoTask.repository.projection.AmenityCountProjection;
 import by.Egrius.demoTask.service.HotelService;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -219,7 +219,7 @@ class HotelServiceUnitTests {
 
             // when / then
             assertThatThrownBy(() -> hotelService.getHotelById(id))
-                    .isInstanceOf(EntityNotFoundException.class);
+                    .isInstanceOf(HotelNotFoundException.class);
         }
     }
 
@@ -273,7 +273,7 @@ class HotelServiceUnitTests {
 
             // when / then
             assertThatThrownBy(() -> hotelService.addAmenities(hotelId, List.of("Free WiFi")))
-                    .isInstanceOf(EntityNotFoundException.class);
+                    .isInstanceOf(HotelNotFoundException.class);
         }
 
         @Test

@@ -21,11 +21,12 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ActiveProfiles("test")
 @DataJpaTest
 @Import(HotelFilterRepositoryImpl.class)
-public class HotelFilterRepositoryIT {
+public class HotelFilterRepositoryIntegrationTests {
 
     @Autowired
     private HotelFilterRepositoryImpl hotelFilterRepository;
@@ -119,20 +120,21 @@ public class HotelFilterRepositoryIT {
     }
 
     @Test
-    void shouldMatchAnyAmenity_notAll() {
+    void shouldMatchAmenity_ignoringCase() {
         setUp();
         List<Hotel> result = hotelFilterRepository.findAllByFilter(
-                new HotelFilter(null, null, null, null, List.of(WIFI_AMENITY)));
+                new HotelFilter(null, null, null, null, List.of("Free wiFi")));
         assertThat(result).hasSize(3);
     }
 
     @Test
-    void shouldNotDuplicateHotels_whenMultipleAmenitiesMatch() {
+    void shouldMatchAllAmenities_whenMultipleProvided() {
         setUp();
         List<Hotel> result = hotelFilterRepository.findAllByFilter(
                 new HotelFilter(null, null, null, null, List.of(WIFI_AMENITY, PARKING_AMENITY)));
         assertThat(result).extracting(Hotel::getName).doesNotHaveDuplicates();
-        assertThat(result).hasSize(3);
+        assertThat(result).hasSize(1);
+        assertThat(result.getFirst().getName()).isEqualTo("DoubleTree");
     }
 
     @Test

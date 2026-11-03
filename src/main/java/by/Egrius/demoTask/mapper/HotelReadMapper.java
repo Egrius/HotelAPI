@@ -7,9 +7,7 @@ import by.Egrius.demoTask.entity.embeddable.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.springframework.stereotype.Component;
 
-@Component
 @Mapper(componentModel = "spring")
 public interface HotelReadMapper {
 
@@ -32,8 +30,8 @@ public interface HotelReadMapper {
 
     @Named("shortenAddress")
     default String shortenAddress(Address address) {
-        return address.getStreet() + ", "
-                + address.getHouseNumber() + ", "
+        return address.getHouseNumber() + " "
+                + address.getStreet() + ", "
                 + address.getCity() + ", "
                 + address.getPostCode() + ", "
                 + address.getCountry();

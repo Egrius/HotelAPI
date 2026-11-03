@@ -42,11 +42,11 @@ public class ApiController {
 	Например: /search?city=minsk
      */
     @GetMapping("/search")
-    public List<HotelShortInfoReadDto> getHotelsShortInfoByFilter(@RequestParam(required = false) String name,
-                                                             @RequestParam(required = false) String brand,
-                                                             @RequestParam(required = false) String city,
-                                                             @RequestParam(required = false) String country,
-                                                             @RequestParam(required = false) List<String> amenities) {
+    public List<HotelShortInfoReadDto> getHotelsShortInfoByFilter(@RequestParam(value = "name", required = false) String name,
+                                                             @RequestParam(value = "brand", required = false) String brand,
+                                                             @RequestParam(value = "city", required = false) String city,
+                                                             @RequestParam(value = "country", required = false) String country,
+                                                             @RequestParam(value = "amenities", required = false) List<String> amenities) {
 
         HotelFilter filter = new HotelFilter(name, brand, city, country, amenities);
 

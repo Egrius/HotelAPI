@@ -70,8 +70,10 @@ public record HotelCreateDto(
     public record ArrivalTimeCreateDto(
 
             @NotNull
+            @JsonFormat(pattern = "HH:mm")
             LocalTime checkIn,
 
+            @JsonFormat(pattern = "HH:mm")
             LocalTime checkOut
     ) {}
 }

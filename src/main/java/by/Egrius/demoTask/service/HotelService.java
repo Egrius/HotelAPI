@@ -7,13 +7,13 @@ import by.Egrius.demoTask.entity.Hotel;
 import by.Egrius.demoTask.entity.embeddable.Address;
 import by.Egrius.demoTask.entity.embeddable.ArrivalTime;
 import by.Egrius.demoTask.entity.embeddable.Contacts;
+import by.Egrius.demoTask.exception.HotelNotFoundException;
 import by.Egrius.demoTask.mapper.HotelReadMapper;
 import by.Egrius.demoTask.repository.HotelFilterRepository;
 import by.Egrius.demoTask.repository.HotelHistogramRepository;
 import by.Egrius.demoTask.repository.HotelRepository;
 import by.Egrius.demoTask.repository.filter.HotelFilter;
 import by.Egrius.demoTask.repository.projection.AmenityCountProjection;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class HotelService {
     // 2)
     public HotelReadDto getHotelById(long id) {
         Hotel hotel = hotelRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Could not find a hotel with id '" + id + "'"));
+                .orElseThrow(() -> new HotelNotFoundException("Could not find a hotel with id '" + id + "'"));
 
         return hotelReadMapper.map(hotel);
     }
@@ -96,7 +96,7 @@ public class HotelService {
     public void addAmenities(long hotelId, List<String> amenities) {
 
         Hotel hotel = hotelRepository.findById(hotelId)
-                .orElseThrow(() -> new EntityNotFoundException("Could not find a hotel with id '" + hotelId + "'"));
+                .orElseThrow(() -> new HotelNotFoundException("Could not find a hotel with id '" + hotelId + "'"));
 
         Set<String> hotelAmenities = hotel.getAmenities();
 

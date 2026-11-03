@@ -9,6 +9,8 @@ import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.function.Function;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class HotelHistogramRepositoryImpl implements HotelHistogramRepository {
 
     private final EntityManager entityManager;

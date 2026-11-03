@@ -9,14 +9,6 @@ import java.util.List;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
-    @Query(value = """
-        SELECT 
-            ha.amenity AS amenity,
-            COUNT(*) AS count
-        FROM hotel_amenities ha
-        GROUP BY ha.amenity
-        ORDER BY ha.amenity
-    """,
-            nativeQuery = true)
+    @Query("SELECT a AS amenity, COUNT(h) AS count FROM Hotel h JOIN h.amenities a GROUP BY a ORDER BY a")
     List<AmenityCountProjection> getHistogramByHotelAmenity();
 }

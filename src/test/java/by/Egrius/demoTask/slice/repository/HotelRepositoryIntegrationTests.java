@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ActiveProfiles("test")
 @DataJpaTest
-public class HotelRepositoryIT {
+public class HotelRepositoryIntegrationTests {
 
     @Autowired
     private HotelRepository hotelRepository;
@@ -95,6 +95,9 @@ public class HotelRepositoryIT {
         @Test
         void shouldSaveAndReadAmenities() {
 
+            String wifiAmenity = "Free WiFi";
+            String parkingAmenity = "Free parking";
+
             Set<String> amenities = Set.of("Free WiFi", "Free parking");
 
             Hotel hotel = hotel(
@@ -115,7 +118,7 @@ public class HotelRepositoryIT {
             assertNotNull(found.getId());
             assertNotNull(found.getAmenities());
 
-            assertThat(found.getAmenities()).containsAll(amenities);
+            assertThat(found.getAmenities()).containsExactlyInAnyOrder(wifiAmenity, parkingAmenity);
         }
 
 
