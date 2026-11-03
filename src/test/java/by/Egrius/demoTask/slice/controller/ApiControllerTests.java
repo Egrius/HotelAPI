@@ -38,8 +38,6 @@ public class ApiControllerTests {
     @MockitoBean
     private HotelService hotelService;
 
-    private static final String BASE = "/property-view";
-
     private final HotelReadDto hotelReadDto = new HotelReadDto(
             1L,
             "DoubleTree by Hilton Minsk",
