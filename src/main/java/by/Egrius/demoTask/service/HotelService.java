@@ -55,7 +55,7 @@ public class HotelService {
 
     // 3)
     public List<HotelShortInfoReadDto> getHotelsByFilter(HotelFilter filter) {
-        log.info("Got filter: " + filter);
+        log.info("getHotelsByFilter(): got filter: {}", filter);
 
         return hotelFilterRepository.findAllByFilter(filter).stream().map(hotelReadMapper::mapToShortInfoReadDto).toList();
     }
@@ -88,6 +88,7 @@ public class HotelService {
 
         Hotel saved = hotelRepository.save(hotel);
 
+        log.info("Created new hotel with id: {}", saved.getId());
         return hotelReadMapper.mapToShortInfoReadDto(saved);
     }
 
@@ -101,6 +102,8 @@ public class HotelService {
         Set<String> hotelAmenities = hotel.getAmenities();
 
         hotelAmenities.addAll(amenities);
+
+        log.info("Added {} amenities to hotel with id: {}", amenities.size(), hotelId);
     }
 
     // 6)
